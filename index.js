@@ -1,4 +1,4 @@
-const MLX90614 = require('mlx90614-driver');
+const MLX90614 = require('mlx90614');
 const sensor = new MLX90614();
 
 
