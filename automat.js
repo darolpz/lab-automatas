@@ -1,18 +1,8 @@
 "use strict";
-const readTempture = require("./utils");
+const { readTempture } = require("./utils");
 module.exports = class Automat {
   actualTimer;
   constructor() {
-    this.states = [
-      "REPOSING",
-      "COOKING",
-      "CALCULATING",
-      "MOVING",
-      "INTERACTING",
-      "RETURNING",
-      "ENDED",
-    ];
-    this.status = this.states[0];
     this.actualTimer = null;
   }
 
@@ -23,13 +13,13 @@ module.exports = class Automat {
   async reposing() {
     console.log("Reposing");
     const automaton = this;
-    this.actualTimer = setInterval(()=>{
+    this.actualTimer = setInterval(async () => {
       const tempt = await readTempture();
       if (tempt > 40) {
         automaton.status = automaton.states[1];
         clearInterval(automaton.actualTimer);
         console.log("Finishing repose...");
-        cooking();
+        automaton.cooking();
       }
     }, 1000);
   }
@@ -45,7 +35,7 @@ module.exports = class Automat {
         clearInterval(automaton.actualTimer);
         console.log("Finishing cooking");
       }
-      
+
       seconds++;
     }, 1000);
   }
