@@ -2,6 +2,7 @@
 const MLX90614 = require("mlx90614");
 
 module.exports = class Automat {
+  actualTimer;
   constructor() {
     this.states = [
       "REPOSING",
@@ -13,15 +14,16 @@ module.exports = class Automat {
       "ENDED",
     ];
     this.status = this.states[0];
+    this.actualTimer = null;
   }
 
   run() {
     const automaton = this;
-    setInterval(async () => {
+    this.actualTimer = setInterval(async () => {
       const tempt = await automaton.readTempture();
       if (tempt > 40) {
-        automaton.status = states[1];
-        clearInterval(this);
+        automaton.status = automaton.states[1];
+        clearInterval(automaton.actualTimer);
       }
     }, 1000);
     console.log("Finished", this.status);
@@ -30,7 +32,7 @@ module.exports = class Automat {
   async readTempture() {
     const sensor = new MLX90614();
     try {
-      const temp = await sensor.readObject();
+      const temp = await sensor.readObjectSync();
       return temp;
     } catch (err) {
       console.error("Error trying to read temp", err);
