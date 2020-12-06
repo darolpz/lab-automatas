@@ -12,27 +12,26 @@ module.exports = class Automat {
 
   async reposing() {
     console.log("Reposing");
-    const automaton = this;
+    const automat = this;
     this.actualTimer = setInterval(async () => {
       const tempt = await readTempture();
       if (tempt > 40) {
-        automaton.status = automaton.states[1];
-        clearInterval(automaton.actualTimer);
+        clearInterval(automat.actualTimer);
         console.log("Finishing repose...");
-        automaton.cooking();
+        automat.cooking();
       }
     }, 1000);
   }
 
   async cooking() {
     console.log("Start to cooking");
-    const automaton = this;
+    const automat = this;
     let seconds = 0;
     const limit = 10;
     this.actualTimer = setInterval(() => {
       console.log(`I've been cooking for ${seconds} seconds`);
       if (seconds == limit) {
-        clearInterval(automaton.actualTimer);
+        clearInterval(automat.actualTimer);
         console.log("Finishing cooking");
         automation.calculating();
       }
@@ -49,33 +48,33 @@ module.exports = class Automat {
 
   async moving(distance) {
     console.log("Moving...");
-    const automaton = this;
+    const automat = this;
     const speed = process.env.SPEED;
     const time = (distance / speed) * 1000;
     setTimeout(() => {
       console.log("Position reached.");
-      automaton.interacting();
+      automat.interacting();
     }, time);
   }
 
   async interacting(distance) {
     console.log("Interacting...");
-    const automaton = this;
+    const automat = this;
     const time = 10 + Math.floor(Math.random() * 10) * 1000;
     setTimeout(() => {
       console.log("Interaction ended");
-      automaton.returning(distance);
+      automat.returning(distance);
     }, time);
   }
 
   async returning(distance) {
     console.log("Coming back");
-    const automaton = this;
+    const automat = this;
     const speed = process.env.SPEED;
     const time = (distance / speed) * 1000;
     setTimeout(() => {
       console.log("Position reached.");
-      automaton.reposing();
+      automat.reposing();
     }, time);
   }
 };

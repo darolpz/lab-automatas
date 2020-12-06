@@ -12,9 +12,14 @@ async function readTempture() {
 }
 
 async function getLocation() {
-  const url = "http://ip-api.com/json/";
-  const res = await (await fetch(url)).json();
-  return { lat: res.lat, lon: res.lon };
+  try {
+    const url = "http://ip-api.com/json/";
+
+    const res = await (await fetch(url)).json();
+    return { lat: res.lat, lon: res.lon };
+  } catch (err) {
+    console.error("Error trying to get location", err);
+  }
 }
 module.exports = {
   readTempture,
