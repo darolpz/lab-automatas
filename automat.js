@@ -1,7 +1,7 @@
 "use strict";
-const { readTempture } = require("./utils");
+const { readTempture, getLocation } = require("./utils");
+const fetch = require("node-fetch");
 module.exports = class Automat {
-  actualTimer;
   constructor() {
     this.actualTimer = null;
   }
@@ -34,9 +34,48 @@ module.exports = class Automat {
       if (seconds == limit) {
         clearInterval(automaton.actualTimer);
         console.log("Finishing cooking");
+        automation.calculating();
       }
-
       seconds++;
     }, 1000);
+  }
+
+  async calculating() {
+    console.log("Calculating");
+    const ip = await getLocation();
+    console.log("Calculation finished");
+    this.moving(10);
+  }
+
+  async moving(distance) {
+    console.log("Moving...");
+    const automaton = this;
+    const speed = process.env.SPEED;
+    const time = (distance / speed) * 1000;
+    setTimeout(() => {
+      console.log("Position reached.");
+      automaton.interacting();
+    }, time);
+  }
+
+  async interacting(distance) {
+    console.log("Interacting...");
+    const automaton = this;
+    const time = 10 + Math.floor(Math.random() * 10) * 1000;
+    setTimeout(() => {
+      console.log("Interaction ended");
+      automaton.returning(distance);
+    }, time);
+  }
+
+  async returning(distance) {
+    console.log("Coming back");
+    const automaton = this;
+    const speed = process.env.SPEED;
+    const time = (distance / speed) * 1000;
+    setTimeout(() => {
+      console.log("Position reached.");
+      automaton.reposing();
+    }, time);
   }
 };

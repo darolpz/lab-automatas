@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/darolpz/lab-automatas#readme",
   "dependencies": {
-    "mlx90614": "^0.1.7"
+    "mlx90614": "^0.1.7",
+    "node-fetch": "^2.6.1"
   }
 }
