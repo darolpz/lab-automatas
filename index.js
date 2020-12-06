@@ -1,5 +1,5 @@
-'use strict'
-const Automat = require('./automat')
-const automat = new Automat()
+"use strict";
+const Automat = require("./automat");
+const automat = new Automat();
 
-automat.run()
+automat.run();

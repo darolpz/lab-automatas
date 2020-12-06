@@ -1,6 +1,5 @@
 "use strict";
-const MLX90614 = require("mlx90614");
-
+const readTempture = require("./utils");
 module.exports = class Automat {
   actualTimer;
   constructor() {
@@ -18,24 +17,36 @@ module.exports = class Automat {
   }
 
   run() {
+    this.reposing();
+  }
+
+  async reposing() {
+    console.log("Reposing");
     const automaton = this;
-    this.actualTimer = setInterval(async () => {
-      const tempt = await automaton.readTempture();
+    this.actualTimer = setInterval(()=>{
+      const tempt = await readTempture();
       if (tempt > 40) {
         automaton.status = automaton.states[1];
         clearInterval(automaton.actualTimer);
+        console.log("Finishing repose...");
+        cooking();
       }
     }, 1000);
-    console.log("Finished", this.status);
   }
 
-  async readTempture() {
-    const sensor = new MLX90614();
-    try {
-      const temp = await sensor.readObjectSync();
-      return temp;
-    } catch (err) {
-      console.error("Error trying to read temp", err);
-    }
+  async cooking() {
+    console.log("Start to cooking");
+    const automaton = this;
+    let seconds = 0;
+    const limit = 10;
+    this.actualTimer = setInterval(() => {
+      console.log(`I've been cooking for ${seconds} seconds`);
+      if (seconds == limit) {
+        clearInterval(automaton.actualTimer);
+        console.log("Finishing cooking");
+      }
+      
+      seconds++;
+    }, 1000);
   }
 };
