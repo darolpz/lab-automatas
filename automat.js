@@ -33,7 +33,7 @@ module.exports = class Automat {
       if (seconds == limit) {
         clearInterval(automat.actualTimer);
         console.log("Finishing cooking");
-        automation.calculating();
+        automat.calculating();
       }
       seconds++;
     }, 1000);
