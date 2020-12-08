@@ -43,11 +43,14 @@ module.exports = class Automat {
     const location = await getLocation();
     console.log(`Own location: (${location.lat},${location.lon})`);
     const { robot, distance } = getClosetRobot();
+    const bools = [true, false];
+    bools[Math.floor(Math.random * bools.length)]
+      ? (location.lat += distance)
+      : (location.lon += distance);
     console.log(
-      `Calculation finished, going to robot ${robot} (${location.lat}, ${
-        location.lon + distance
-      }), distance ${distance}`
+      `Calculation finished, going to robot ${robot} (${location.lat}, ${location.lon}), distance ${distance}`
     );
+
     this.moving(distance);
   }
 

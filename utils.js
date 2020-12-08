@@ -46,7 +46,7 @@ function getClosetRobot() {
     const random = Math.floor(Math.random() * 10);
     const freeProb = process.env.FREE_PROB / 10;
     if (random >= freeProb) {
-      // console.log(`Robot ${i + 1} is busy`);
+      console.log(`Robot ${i + 1} is busy`);
       distances[i] = inf;
     }
   }
