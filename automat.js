@@ -65,11 +65,12 @@ module.exports = class Automat {
   async interacting(distance) {
     console.log("Interacting...");
     const automat = this;
-    const time =
-      process.env.MIN_INT_TIME + Math.floor(Math.random() * 10) * 1000;
+    const dis = distance;
+    const min_time = parseInt(process.env.MIN_INT_TIME);
+    const time = (min_time + Math.floor(Math.random() * 10)) * 1000;
     setTimeout(() => {
       console.log(`Interaction ended after ${time} seconds`);
-      automat.returning(distance);
+      automat.returning(dis);
     }, time);
   }
 
