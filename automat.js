@@ -26,7 +26,7 @@ module.exports = class Automat {
     console.log("Start to cooking");
     const automat = this;
     let seconds = 0;
-    const limit = proces.env.COOKING_TIME;
+    const limit = process.env.COOKING_TIME;
     this.actualTimer = setInterval(() => {
       console.log(`I've been cooking for ${seconds} seconds`);
       if (seconds == limit) {
@@ -68,7 +68,7 @@ module.exports = class Automat {
     const time =
       process.env.MIN_INT_TIME + Math.floor(Math.random() * 10) * 1000;
     setTimeout(() => {
-      console.log("Interaction ended");
+      console.log(`Interaction ended after ${time} seconds`);
       automat.returning(distance);
     }, time);
   }
