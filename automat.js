@@ -23,7 +23,7 @@ module.exports = class Automat {
   }
 
   async cooking() {
-    console.log("Start to cooking");
+    console.log("Start to cook");
     const automat = this;
     let seconds = 0;
     const limit = process.env.COOKING_TIME;
