@@ -68,7 +68,7 @@ module.exports = class Automat {
     const min_time = parseInt(process.env.MIN_INT_TIME);
     const time = (min_time + Math.floor(Math.random() * 10)) * 1000;
     setTimeout(() => {
-      console.log(`Interaction ended after ${time} seconds`);
+      console.log(`Interaction ended after ${time / 1000} seconds`);
       automat.returning(distance);
     }, time);
   }
