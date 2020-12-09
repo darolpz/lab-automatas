@@ -1,17 +1,6 @@
-const MLX90614 = require('mlx90614');
-const sensor = new MLX90614();
+"use strict";
+const Automat = require("./automat");
+const automat = new Automat();
 
-
-function getTemp() {
-  sensor.readObject((err, temp) => {
-      if (err != null) throw err;
-      console.log('Object:', temp);
-  });
-
-  sensor.readAmbient((err, temp) => {
-      if (err != null) throw err;
-      console.log('Ambient:', temp);
-  });
-}
-
-setInterval(getTemp, 1000);
+require("dotenv").config();
+automat.run();
